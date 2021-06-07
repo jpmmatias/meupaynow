@@ -54,7 +54,9 @@ describe 'Admin Account Managment' do
 				name: 'Jane Doe',
 				role: 10
 			)
-			visit new_user_session_path
+			visit root_path
+
+			click_on 'Fazer Login'
 
 			fill_in 'Email', with: 'janedoe@paynow.com.br'
 			fill_in 'Senha', with: 'Senh@1234'
@@ -63,7 +65,6 @@ describe 'Admin Account Managment' do
 			end
 			expect(page).to have_text('Login efetuado com sucesso')
 			expect(page).to have_text('Jane Doe')
-			expect(page).to have_link('Cursos')
 			expect(page).to_not have_link('Login')
 			expect(page).to have_link('Sair')
 		end
@@ -97,17 +98,23 @@ describe 'Admin Account Managment' do
 				)
 
 			visit new_user_session_path
+
 			fill_in 'Email', with: 'janedoe@paynow.com.br'
 			fill_in 'Senha', with: 'Senh@1234'
+
 			within 'form' do
 				click_on 'Entrar'
 			end
+
+			expect(current_path).to eq(dashboard_index_path)
+
 			click_on 'Sair'
 
 			expect(page).to have_text('Saiu com sucesso')
 			expect(page).to_not have_text('Jane Doe')
 			expect(current_path).to eq(root_path)
-			expect(page).to have_link('Sign Up')
+
+			expect(page).to have_link('Criar Conta')
 			expect(page).to have_link('Login')
 			expect(page).to_not have_link('Sair')
 		end
@@ -124,8 +131,9 @@ describe 'Admin Account Managment' do
 				)
 			visit new_user_session_path
 
-			expect(page).to have_link('Esqueci minha senha')
-			click_on ('Esqueci minha senha')
+			expect(page).to have_link('Esqueceu sua senha?')
+
+			click_on ('Esqueceu sua senha?')
 
 			fill_in 'Email', with: 'janedoe@paynow.com.br'
 			click_on('Enviar')
