@@ -39,4 +39,5 @@ class RegistrationsController < Devise::RegistrationsController
         dashboard_index_path
     end
 
+
   end
