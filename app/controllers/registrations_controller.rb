@@ -36,7 +36,15 @@ class RegistrationsController < Devise::RegistrationsController
     protected
 
     def after_sign_in_path_for(resource)
+      case resource.role
+      when 'admin'
         dashboard_index_path
+      when 'client-admin'
+        new_company_path
+      else
+        new_company_path
+      end
+
     end
 
 

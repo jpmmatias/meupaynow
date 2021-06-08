@@ -16,13 +16,20 @@ describe 'Client Account Managment' do
 			fill_in 'Confirmação de senha', with: 'Senh@1234'
 			click_on 'Criar conta'
 
-			expect(current_path).to eq(dashboard_index_path)
-			expect(page).to have_text('Login efetuado com sucesso')
-			expect(page).to have_text('Olá Lucas')
-			expect(page).to have_text('Cliente')
-			expect(page).to_not have_link('Criar Conta')
-            expect(page).to_not have_link('Login')
-			expect(page).to have_link('Sair')
+			expect(current_path).to eq(new_company_path)
+			expect(page).to have_text('Login efetuado')
+
+            expect(page).to have_text('Configurar sua empresa')
+
+            fill_in 'CNPJ', with: '866783090001530'
+            fill_in 'Razão Social', with: 'Code Play Empresa'
+			fill_in 'Endereço de Faturamento', with: 'Rua das Flores 7666'
+			fill_in 'Email de Faturamento', with: 'financeiroo@codeplay.com.br'
+			click_on 'Concluir'
+
+            expect(page).to have_content('Cliente')
+            expect(page).to have_link('Sair')
+            expect(current_path).to eq(dashboard_index_path)
 		end
 
 		it 'without valid field' do
@@ -106,24 +113,9 @@ describe 'Client Account Managment' do
 
 	context 'logout' do
 		it 'successfully' do
-			user =
-				User.create!(
-					email: 'lucasgabriel@codeplay.com.br',
-					name: 'Lucas',
-                    surname:'Gabriel',
-					password: 'Senh@1234',
-				)
+		    client_login
 
-			visit new_user_session_path
-
-			fill_in 'Email', with: 'lucasgabriel@codeplay.com.br'
-			fill_in 'Senha', with: 'Senh@1234'
-
-			within 'form' do
-				click_on 'Entrar'
-			end
-
-			expect(current_path).to eq(dashboard_index_path)
+		    visit dashboard_index_path
 
 			click_on 'Sair'
 

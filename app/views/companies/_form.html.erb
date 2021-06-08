@@ -1,0 +1,47 @@
+<%= form_with model: company do |f| %>
+<div>
+    <%= f.label :corporate_name %>
+    <%= f.text_field :corporate_name%>
+    <%if company.errors.full_messages_for(:corporate_name).any? %>
+    <ul>
+        <% company.errors.full_messages_for(:corporate_name).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<div>
+    <%= f.label :cnpj %>
+    <%= f.text_field :cnpj%>
+    <%if company.errors.full_messages_for(:cnpj).any? %>
+    <ul>
+        <% company.errors.full_messages_for(:cnpj).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<div>
+    <%= f.label :address %>
+    <%= f.text_field :address%>
+    <%if company.errors.full_messages_for(:address).any? %>
+    <ul>
+        <% company.errors.full_messages_for(:address).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%if company.errors.full_messages_for(:email).any? %>
+    <ul>
+        <% company.errors.full_messages_for(:email).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<%= f.submit button_text %>
+<% end %>
