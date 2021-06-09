@@ -48,7 +48,7 @@ describe 'Client configure company' do
 
 			fill_in 'Nome', with: 'Lucas'
             fill_in 'Sobrenome', with: 'Gabriel'
-			fill_in 'Email', with: 'lucasgabriel@codeplay.com.br'
+			fill_in 'Email', with: 'lucasgabriel@codeplayy.com.br'
 			fill_in 'Senha', with: 'Senh@1234'
 			fill_in 'Confirmação de senha', with: 'Senh@1234'
 			click_on 'Criar conta'
@@ -56,10 +56,10 @@ describe 'Client configure company' do
             fill_in 'CNPJ', with: '86678309000150'
             fill_in 'Razão Social', with: 'Code Play'
 			fill_in 'Endereço de Faturamento', with: 'Rua das Flores 766'
-			fill_in 'Email de Faturamento', with: 'financeiro@codeplay.com.br'
+			fill_in 'Email de Faturamento', with: 'financeiro@codeplayy.com.br'
 			click_on 'Concluir'
 
-            expect(page).to have_content('já está em uso', count: 4)
+            expect(page).to have_content('já está em uso', count: 3)
         end
 
         # it "and can't go to the dashboard before that" do

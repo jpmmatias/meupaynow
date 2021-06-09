@@ -5,9 +5,22 @@ class RegistrationsController < Devise::RegistrationsController
 
     def create
         build_resource(sign_up_params)
-
-        if resource.email.include? "@paynow.com.br"
+        companies_emails = Company.all
+        if resource.email.split('@')[1] == "paynow.com.br"
             resource.role = 10
+        else
+          companies_emails.each do |company_email|
+            splited_email = company_email.email.split('@')
+            domain = splited_email[1]
+            if resource.email.split('@')[1] == domain
+              resource.role = 0
+              resource.company = Company.find_by(email: company_email.email )
+            end
+          end
+        end
+
+        if resource.role != 'admin' and resource.company.nil?
+          resource.role = 5
         end
 
         resource.save
@@ -36,15 +49,7 @@ class RegistrationsController < Devise::RegistrationsController
     protected
 
     def after_sign_in_path_for(resource)
-      case resource.role
-      when 'admin'
-        dashboard_index_path
-      when 'client-admin'
-        new_company_path
-      else
-        new_company_path
-      end
-
+      resource.role == 'client_admin' ? new_company_path : dashboard_index_path
     end
 
 

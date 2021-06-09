@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
     def create
         @company = Company.new(course_params)
 		if @company.save
-			current_user.company = @company
+			current_user.update(company: @company)
 			redirect_to dashboard_index_path, notice: 'Empresa configurada com sucesso'
 		else
 			render :new

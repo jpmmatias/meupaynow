@@ -5,4 +5,8 @@
 <% if current_user.role == 'client'%>
 <p>Cliente</p>
 <% end %>
+<% if current_user.role == 'client_admin'%>
+<p>Admin Cliente</p>
+<p><%=current_user.company.corporate_name%></p>
+<% end %>
 <%= link_to "Sair",  destroy_user_session_path , method: :delete %>

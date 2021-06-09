@@ -11,7 +11,7 @@ describe 'Client Account Managment' do
 
 			fill_in 'Nome', with: 'Lucas'
             fill_in 'Sobrenome', with: 'Gabriel'
-			fill_in 'Email', with: 'lucasgabriel@codeplay.com.br'
+			fill_in 'Email', with: 'lucasgabriel@codeplay0.com.br'
 			fill_in 'Senha', with: 'Senh@1234'
 			fill_in 'Confirmação de senha', with: 'Senh@1234'
 			click_on 'Criar conta'
@@ -24,10 +24,11 @@ describe 'Client Account Managment' do
             fill_in 'CNPJ', with: '866783090001530'
             fill_in 'Razão Social', with: 'Code Play Empresa'
 			fill_in 'Endereço de Faturamento', with: 'Rua das Flores 7666'
-			fill_in 'Email de Faturamento', with: 'financeiroo@codeplay.com.br'
+			fill_in 'Email de Faturamento', with: 'financeiroo@codeplay0.com.br'
 			click_on 'Concluir'
 
-            expect(page).to have_content('Cliente')
+            expect(page).to have_content('Admin Cliente')
+            expect(page).to have_content('Code Play Empresa')
             expect(page).to have_link('Sair')
             expect(current_path).to eq(dashboard_index_path)
 		end
@@ -64,6 +65,23 @@ describe 'Client Account Managment' do
             expect(page).to have_content('Criar Conta')
             expect(page).to have_content('Contas de e-mails públicos não permitidos')
             expect(current_path).not_to eq(dashboard_index_path)
+        end
+
+        it "and email domain exists in company" do
+            Company.create(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766')
+
+            visit new_user_registration_path
+
+			fill_in 'Nome', with: 'Lucas'
+            fill_in 'Sobrenome', with: 'Gabriel'
+			fill_in 'Email', with: 'lucasgabriel@codeplay.com.br'
+			fill_in 'Senha', with: 'Senh@1234'
+			fill_in 'Confirmação de senha', with: 'Senh@1234'
+			click_on 'Criar conta'
+
+            expect(page).to have_content('Cliente')
+            expect(page).to have_link('Sair')
+            expect(current_path).to eq(dashboard_index_path)
         end
 
 	end
