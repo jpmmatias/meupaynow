@@ -1,0 +1,14 @@
+<% @payment_methods.each do |payment_method| %>
+<%= payment_method.name %>
+<% if payment_method.payment_type == 'pix' %>
+Pix
+<% end %>
+<% if payment_method.payment_type == 'cartao_de_credito' %>
+Cartão de Crédito
+<% end %>
+<% if payment_method.payment_type == 'boleto' %>
+Boleto Bancário
+<% end %>
+<%=  payment_method.tax.to_s.last == '0' ?  number_to_percentage(payment_method.tax, precision: 0) : number_to_percentage(payment_method.tax, precision: 1) %>
+<%= image_tag payment_method.icon %>
+<% end %>

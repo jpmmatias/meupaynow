@@ -8,6 +8,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
@@ -19,7 +20,17 @@
     <% if alert %>
     <div class="alert alert-dark"> <strong><%= alert %></strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
     <% end%>
+
+    <% if user_signed_in? and current_user.role ='admin' %>
+
+    <%= render 'layouts/sidenav' , type: 'admin' %>
+    <div class="height-100 bg-light body"> <%= yield %></div>
+
+    <% else %>
     <%= yield %>
+    <% end %>
+
+
 </body>
 
 </html>

@@ -28,7 +28,6 @@ describe 'Client Account Managment' do
 			click_on 'Concluir'
 
             expect(page).to have_content('Admin Cliente')
-            expect(page).to have_content('Code Play Empresa')
             expect(page).to have_link('Sair')
             expect(current_path).to eq(dashboard_index_path)
 		end
@@ -135,8 +134,8 @@ describe 'Client Account Managment' do
 
 		    visit dashboard_index_path
 
-			click_on 'Sair'
-
+			# Botão de sair
+			click_link 'Sair'
 			expect(page).to have_text('Saiu com sucesso')
 			expect(page).to_not have_text('Lucas')
 			expect(current_path).to eq(root_path)
@@ -156,6 +155,7 @@ describe 'Client Account Managment' do
                     surname: 'Gabirel',
 					password: 'Senh@1234',
 				)
+
 			visit new_user_session_path
 
 			expect(page).to have_link('Esqueceu sua senha?')

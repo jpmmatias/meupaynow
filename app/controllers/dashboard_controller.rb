@@ -5,6 +5,8 @@ class DashboardController < ApplicationController
 
     end
 
+
+
     private
 
     #  def check_if_user_has_company

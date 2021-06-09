@@ -1,12 +1,18 @@
-<p>Olá <%= current_user.name %>!</p>
-<% if current_user.role == 'admin'%>
-<p>Admin!</p>
-<% end %>
-<% if current_user.role == 'client'%>
-<p>Cliente</p>
-<% end %>
-<% if current_user.role == 'client_admin'%>
-<p>Admin Cliente</p>
-<p><%=current_user.company.corporate_name%></p>
-<% end %>
-<%= link_to "Sair",  destroy_user_session_path , method: :delete %>
+<div id="body-pd">
+    <p>Olá <%= current_user.name %>!</p>
+    <% if current_user.role == 'admin'%>
+    <p>Admin!</p>
+    <% end %>
+    <% if current_user.role == 'client'%>
+    <p>Cliente</p>
+    <% end %>
+    <% if current_user.role == 'client_admin'%>
+    <p>Admin Cliente</p>
+    <%
+=begin%>
+    <p><%=current_user.company.corporate_name%></p>
+    <%
+=end%>
+    <% end %>
+
+</div>
