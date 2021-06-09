@@ -6,6 +6,7 @@ class User < ApplicationRecord
   enum role: { client: 0, client_admin: 5, admin: 10 }
 
   validates :name, presence: true
+
   validates_format_of :email, without: /gmail\.com/i, message:'Contas de e-mails públicos não permitidos'
   validates_format_of :email, without: /gmail\.com.br/i, message:'Contas de e-mails públicos não permitidos'
   validates_format_of :email, without: /yahoo\.com.br/i, message:'Contas de e-mails públicos não permitidos'

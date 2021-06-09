@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_052913) do
+ActiveRecord::Schema.define(version: 2021_06_09_025905) do
 
   create_table "companies", force: :cascade do |t|
     t.string "corporate_name"
     t.integer "cnpj"
     t.string "email"
     t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.integer "payment_type", default: 0
+    t.string "name"
+    t.decimal "tax"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
