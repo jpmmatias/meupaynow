@@ -1,0 +1,14 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      payment_method:
+        one: 'Método de Pagamento'
+        other: 'Métodos de Pagamento'
+    attributes:
+      payment_method:
+        name: 'Nome'
+        tax: 'Taxa'
+        payment_type: 'Tipo de Pagamento'
+        active: 'Ativo'
+        icon: 'Icone'

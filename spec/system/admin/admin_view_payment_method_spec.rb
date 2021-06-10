@@ -24,6 +24,17 @@ describe "Admin view" do
         expect(page).to have_content('Inter')
         expect(page).to have_content('Boleto Bancário')
         expect(page).to have_content('4,5%')
+
+        expect(page).to have_content('Ativo')
+    end
+
+    it "but have no payment methods registred" do
+      admin_login
+      visit dashboard_index_path
+      click_on('Metodos de Pagamento')
+
+      expect(page).to have_content('Sem métodos de pagamentos registrados')
     end
   end
+
 end

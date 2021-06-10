@@ -1,3 +1,4 @@
+<%= link_to "Criar Novo Metodo de Pagamento", new_payment_method_path %>
 <% @payment_methods.each do |payment_method| %>
 <%= payment_method.name %>
 <% if payment_method.payment_type == 'pix' %>
@@ -11,4 +12,9 @@ Boleto Bancário
 <% end %>
 <%=  payment_method.tax.to_s.last == '0' ?  number_to_percentage(payment_method.tax, precision: 0) : number_to_percentage(payment_method.tax, precision: 1) %>
 <%= image_tag payment_method.icon %>
+<%= payment_method.active ? 'Ativo' : 'Inativo' %>
+<% end %>
+
+<% if @payment_method.nil? %>
+Sem métodos de pagamentos registrados
 <% end %>
