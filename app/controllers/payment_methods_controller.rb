@@ -1,5 +1,5 @@
 class  PaymentMethodsController < ApplicationController
-    before_action :set_payment_method, only: [:edit, :update, :destory]
+    before_action :set_payment_method, only: [:edit, :update, :destroy]
     def index
         @payment_methods = PaymentMethod.all
     end
@@ -26,6 +26,18 @@ class  PaymentMethodsController < ApplicationController
             render :edit
        end
     end
+
+    def destroy
+
+     if @payment_method.destroy
+         redirect_to payment_methods_path
+     else
+        flash[:alert] = 'Erro ao deletar metodo de pagamento'
+        redirect_to payment_methods_path
+     end
+
+    end
+
 
     private
 

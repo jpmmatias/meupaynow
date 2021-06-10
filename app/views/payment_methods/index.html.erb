@@ -14,6 +14,7 @@ Boleto Bancário
 <%= image_tag payment_method.icon %>
 <%= payment_method.active ? 'Ativo' : 'Inativo' %>
 <%= link_to "Editar", edit_payment_method_path(payment_method) %>
+<%= link_to "Deletar", payment_method_path(payment_method), method: :delete %>
 <% end %>
 
 <% if @payment_method.nil? %>
