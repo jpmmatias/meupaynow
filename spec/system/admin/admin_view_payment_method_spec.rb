@@ -35,6 +35,21 @@ describe "Admin view" do
 
       expect(page).to have_content('Sem métodos de pagamentos registrados')
     end
+
+    it "users with another roles can't view payment methods link" do
+      client_login
+      visit dashboard_index_path
+
+      expect(page).not_to have_content('Metodos de Pagamento')
+    end
+
+    it "users with another roles can't view all payments" do
+      client_login
+      visit payment_methods_path
+
+      expect(current_path).to eq(dashboard_index_path)
+    end
+
   end
 
 end

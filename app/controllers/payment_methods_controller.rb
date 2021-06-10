@@ -1,5 +1,6 @@
 class  PaymentMethodsController < ApplicationController
     before_action :set_payment_method, only: [:edit, :update, :destroy]
+    before_action :check_admin
     def index
         @payment_methods = PaymentMethod.all
     end
@@ -44,6 +45,13 @@ class  PaymentMethodsController < ApplicationController
     def set_payment_method
         @payment_method = PaymentMethod.find(params[:id])
     end
+
+    def check_admin
+        if current_user.role != 'admin'
+            redirect_to root_path
+        end
+    end
+
 
     def payment_method_params
 		params
