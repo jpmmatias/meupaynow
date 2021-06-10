@@ -11,11 +11,15 @@
                  <% end %>
 
                  <% if current_user.role =='admin'%>
-                 <%= link_to payment_methods_path :class=>"nav_link " do %>
+
+                 <%= link_to payment_methods_path :class=>"nav_link" do %>
                  <i class='bx bx-user nav_icon'></i> <span class="nav_name">Metodos de Pagamento</span>
                  <% end %>
-                 <% end %>
 
+                 <%= link_to companies_path :class=>"nav_link" do %>
+                 <i class='bx bx-user nav_icon'></i> <span class="nav_name">Empresas</span>
+                 <% end %>
+                 <% end %>
              </div>
          </div>
          <%= link_to  destroy_user_session_path , method: :delete , :class=> "nav_link sign_out_button" do %>

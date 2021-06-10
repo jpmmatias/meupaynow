@@ -1,15 +1,20 @@
 class CompaniesController < ApplicationController
     before_action :authenticate_user!,
 	              only: %i[ create new show ]
+	before_action :set_company , only: [:show , :regenerate_token, :edit, :update]
+	before_action :only_admin , only: [:index]
 
-	before_action :set_company , only: [:show , :regenerate_token]
+	def index
+		@companies = Company.all
+	end
+
 
     def new
         @company = Company.new
     end
 
     def create
-        @company = Company.new(course_params)
+        @company = Company.new(company_params)
 		if @company.save
 			current_user.update(company: @company)
 			redirect_to dashboard_index_path, notice: 'Empresa configurada com sucesso'
@@ -19,6 +24,19 @@ class CompaniesController < ApplicationController
     end
 
 	def show ;end
+
+	def edit ;end
+
+	def update
+		if @company.update(company_params)
+			redirect_to company_path(@company)
+		else
+			render :edit
+		end
+
+	end
+
+
 
 	def regenerate_token
 		if @company.regenerate_token
@@ -34,7 +52,13 @@ class CompaniesController < ApplicationController
 		@company = Company.find(params[:id])
 	end
 
-	def course_params
+	def only_admin
+		unless current_user.role == 'admin'
+			redirect_to dashboard_index_path
+		end
+	end
+
+	def company_params
 		params
 			.require(:company)
 			.permit(

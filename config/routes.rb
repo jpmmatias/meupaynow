@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index], path:"home"
   resources :payment_methods, only: [:index, :new, :create, :edit, :update, :destroy]
-  resources :companies, only: [:new , :create, :show] do
+  resources :companies, only: [:new , :create, :show, :index, :edit, :update] do
     get 'regenerate_token', on: :member
   end
 

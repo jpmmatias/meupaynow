@@ -1,0 +1,7 @@
+<% @companies.each do |company| %>
+<%= link_to company.corporate_name, company %>
+<% end %>
+
+<% if @compaies.nil? %>
+Sem empresas registradas
+<% end %>

@@ -1,3 +1,11 @@
+<% if current_user.role == 'admin'%>
+<%= link_to "Editar", edit_company_path(@company) %>
+<% end %>
+<h1>Nome: <%= @company.corporate_name %></h1>
+<h1>CNPJ: <%= @company.cnpj %></h1>
+<h1>Endereço: <%= @company.address %></h1>
+<h1>Nome: <%= @company.corporate_name %></h1>
+<h1>Email: <%= @company.email %></h1>
 <h1>Token: <%= @company.token %></h1>
 <% unless current_user.role == 'client' %>
 <%= link_to "Gerar Novo Token", regenerate_token_company_path %>

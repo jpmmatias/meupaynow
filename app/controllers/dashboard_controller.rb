@@ -3,7 +3,6 @@ class DashboardController < ApplicationController
     # before_action :check_if_user_has_company, only: [:index]
     def index
         @company = current_user.company
-
     end
 
 
