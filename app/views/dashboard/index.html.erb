@@ -8,11 +8,7 @@
     <% end %>
     <% if current_user.role == 'client_admin'%>
     <p>Admin Cliente</p>
-    <%
-=begin%>
-    <p><%=current_user.company.corporate_name%></p>
-    <%
-=end%>
+    <%= link_to @company.corporate_name, @company %>
     <% end %>
 
 </div>
