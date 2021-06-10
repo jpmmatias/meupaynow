@@ -1,6 +1,5 @@
 module LoginMacros
 	def client_login(
-
 		client = User.create!(
             email: 'lucasgabriel@codeplay.com.br',
             password: 'Senh@1234',

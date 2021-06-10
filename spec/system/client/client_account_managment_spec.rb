@@ -87,12 +87,12 @@ describe 'Client Account Managment' do
 
 	context 'login' do
 		it 'with email and password' do
-
 			User.create!(
 				email: 'lucasgabriel@codeplay.com.br',
 				password: 'Senh@1234',
 				name: 'Lucas',
                 surname: 'Gabriel',
+				company: Company.create(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766')
 			)
 			visit root_path
 

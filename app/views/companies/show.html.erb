@@ -1,2 +1,4 @@
 <h1>Token: <%= @company.token %></h1>
+<% unless current_user.role == 'client' %>
 <%= link_to "Gerar Novo Token", regenerate_token_company_path %>
+<% end %>

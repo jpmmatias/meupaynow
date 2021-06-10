@@ -26,7 +26,6 @@ class CompaniesController < ApplicationController
 		else
 			redirect_to company_path(@company), alert: 'Algum erro aconteceu'
 		end
-
 	end
 
 	private
