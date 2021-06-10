@@ -1,4 +1,5 @@
 class  PaymentMethodsController < ApplicationController
+    before_action :set_payment_method, only: [:edit, :update, :destory]
     def index
         @payment_methods = PaymentMethod.all
     end
@@ -14,8 +15,22 @@ class  PaymentMethodsController < ApplicationController
         else
             render :new
         end
+    end
 
+    def edit; end
 
+    def update
+       if @payment_method.update(payment_method_params)
+            redirect_to payment_methods_path
+        else
+            render :edit
+       end
+    end
+
+    private
+
+    def set_payment_method
+        @payment_method = PaymentMethod.find(params[:id])
     end
 
     def payment_method_params

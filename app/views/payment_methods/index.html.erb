@@ -13,6 +13,7 @@ Boleto Bancário
 <%=  payment_method.tax.to_s.last == '0' ?  number_to_percentage(payment_method.tax, precision: 0) : number_to_percentage(payment_method.tax, precision: 1) %>
 <%= image_tag payment_method.icon %>
 <%= payment_method.active ? 'Ativo' : 'Inativo' %>
+<%= link_to "Editar", edit_payment_method_path(payment_method) %>
 <% end %>
 
 <% if @payment_method.nil? %>
