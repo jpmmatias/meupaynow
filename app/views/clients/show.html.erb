@@ -1,0 +1,6 @@
+<%= @client.name %>
+<% if @client.active %>
+<%= link_to "Desativar Cliente", request_change_status_client_path %>
+<% else %>
+<%= link_to "Ativar Cliente", request_change_status_client_path %>
+<% end %>

@@ -1,0 +1,14 @@
+<% @clients.each do |client| %>
+<%= link_to client.full_name , client_path(client.id) %>
+<%= client.name %>
+<% if client.role == 'client' %>
+Cliente
+<% end %>
+<% if client.role == 'client_admin' %>
+Cliente Admin
+<% end %>
+<% end %>
+
+<% if @clients.nil? %>
+Sem clientes registrados
+<% end %>

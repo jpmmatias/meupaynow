@@ -9,4 +9,14 @@
     <%= link_to @company.corporate_name, @company %>
     <% end %>
 
+    <p>Notificações</p>
+    <% @status_requests.each do |request| %>
+    <div>
+        <h3>Pedido de <%= request.requester.full_name %></h3>
+        <p>Desativar Cliente: <%= request.client.full_name %></p>
+        <%= link_to "Sim", change_status_request_path(request) %>
+        <%= link_to "Não", '#' %>
+    </div>
+    <% end %>
+
 </div>

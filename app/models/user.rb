@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to :company, optional: true
+  has_many :status_requests
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable,  :validatable
 
@@ -13,6 +14,11 @@ class User < ApplicationRecord
   validates_format_of :email, without: /hotmail\.com.br/i, message:'Contas de e-mails públicos não permitidos'
   validates_format_of :email, without: /yahoo\.com/i, message:'Contas de e-mails públicos não permitidos'
   validates_format_of :email, without: /hotmail\.com/i, message:'Contas de e-mails públicos não permitidos'
+
+  def full_name
+    "#{name} #{surname}"
+  end
+
 
 
   # def email_permited_domains

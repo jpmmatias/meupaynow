@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
     # before_action :check_if_user_has_company, only: [:index]
     def index
         @company = current_user.company
+        @status_requests = StatusRequest.where(reciever: nil)
     end
 
 
