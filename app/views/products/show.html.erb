@@ -3,3 +3,19 @@
 <%= @product.discount_pix.to_s.last == '0' ?  number_to_percentage( @product.discount_pix, precision: 0) : number_to_percentage( @product.discount_pix, precision: 1) %>
 <%= @product.discount_credit.to_s.last == '0' ?  number_to_percentage( @product.discount_credit, precision: 0) : number_to_percentage( @product.discount_credit, precision: 1) %>
 <%= @product.discount_boleto.to_s.last == '0' ?  number_to_percentage( @product.discount_boleto, precision: 0) : number_to_percentage( @product.discount_boleto, precision: 1) %>
+
+<h1>Histórico</h1>
+<ul>
+    <% @product_versions.each do |product| %>
+    <% if product.try(:reify) %>
+    <li>
+        <h1><%= product.reify.name %></h1>
+        <p><%= number_to_currency product.reify.value %></p>
+        <p><%=  product.reify.discount_pix.to_s.last == '0' ?  number_to_percentage( product.reify.discount_pix, precision: 0) : number_to_percentage( product.reify.discount_pix, precision: 1) %></p>
+        <p><%=  product.reify.discount_credit.to_s.last == '0' ?  number_to_percentage( product.reify.discount_credit, precision: 0) : number_to_percentage( product.reify.discount_credit, precision: 1) %></p>
+        <p><%=  product.reify.discount_boleto.to_s.last == '0' ?  number_to_percentage( product.reify.discount_boleto, precision: 0) : number_to_percentage( product.reify.discount_boleto, precision: 1) %></p>
+    </li>
+
+    <% end %>
+    <% end %>
+</ul>

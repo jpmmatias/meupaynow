@@ -1,15 +1,15 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_company, only: [:index, :new, :create]
-  before_action :set_product, only: [:show]
-  before_action :only_company_member , only: [:index , :new, :create]
+  before_action :set_company, only: [:index, :new, :create, :update, :edit]
+  before_action :set_product, only: [:show,:update, :edit]
+  before_action :only_company_member , only: [:index , :new, :create, :update, :edit]
 
   def index
     @products = @company.products
   end
 
   def show
-
+    @product_versions = @product.versions
   end
 
 
@@ -28,6 +28,18 @@ class ProductsController < ApplicationController
       render :new
     end
   end
+
+  def edit;end
+
+  def update
+    if @product.update(product_params)
+      redirect_to company_product_path(@company, @product), notice: 'Produto atualizado com sucesso'
+    else
+      render :new
+    end
+  end
+
+
 
 
   private

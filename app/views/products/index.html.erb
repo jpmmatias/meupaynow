@@ -7,4 +7,5 @@
 <%=  product.discount_pix.to_s.last == '0' ?  number_to_percentage(product.discount_pix, precision: 0) : number_to_percentage(product.discount_pix, precision: 1) %>
 <%=  product.discount_credit.to_s.last == '0' ?  number_to_percentage(product.discount_credit, precision: 0) : number_to_percentage(product.discount_credit, precision: 1) %>
 <%=  product.discount_boleto.to_s.last == '0' ?  number_to_percentage(product.discount_boleto, precision: 0) : number_to_percentage(product.discount_boleto, precision: 1) %>
+<%= link_to "Editar", edit_company_product_path(@company, product) %>
 <% end%>
