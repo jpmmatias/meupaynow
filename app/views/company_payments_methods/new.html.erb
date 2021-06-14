@@ -1,0 +1,51 @@
+<%= form_with model:[@company, @company_payment_method], :url =>  company_company_payments_methods_path(@company, @company_payment_method) do |f| %>
+<div>
+    <%= f.label :payment_method_id %>
+    <% unless @payment_methods.nil? %>
+    <%= f.collection_select :payment_method_id, @payment_methods, :id, :display_info %>
+    <%unless @company_payment_method.errors.full_messages_for(:payment_method_id).nil? %>
+    <ul>
+        <% @company_payment_method.errors.full_messages_for(:payment_method_id).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+    <% end %>
+</div>
+<div>
+    <%= f.label :bank_account %>
+    <%= f.text_field :bank_account%>
+    <%if @company_payment_method.errors.full_messages_for(:bank_account).any? %>
+    <ul>
+        <% @company_payment_method.errors.full_messages_for(:bank_account).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<div>
+    <%= f.label :ag %>
+    <%= f.number_field :ag %>
+    <%if @company_payment_method.errors.full_messages_for(:ag).any? %>
+    <ul>
+        <% @company_payment_method.errors.full_messages_for(:ag).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<div>
+    <%= f.label :alpha_numeric_code %>
+    <%= f.number_field :alpha_numeric_code %>
+    <%if @company_payment_method.errors.full_messages_for(:alpha_numeric_code).any? %>
+    <ul>
+        <% @company_payment_method.errors.full_messages_for(:alpha_numeric_code).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+
+
+<%= f.submit 'Concluir' %>
+<% end %>

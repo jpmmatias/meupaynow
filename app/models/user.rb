@@ -27,5 +27,7 @@ class User < ApplicationRecord
   #       errors.add(:email, "Apenas email empresarial permitido")
   #     end
   # end
-
+	def active_for_authentication?
+		super && active == true
+	end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin deletes payment methods' do
 	it 'successfully' do
-        PaymentMethod.create!(name:'Nubank', payment_type: 0, tax: 1.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
+		PaymentMethod.create!(name:'Nubank', payment_type: 0, bank_code: 260, tax: 1.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
 
 		admin_login
         visit payment_methods_path

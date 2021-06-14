@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Admin manage clients status" do
   context "make user inactive" do
+
     it "successufuly" do
     client = User.create!(
             email: 'lucasgabriel@codeplay.com.br',
@@ -69,7 +70,25 @@ describe "Admin manage clients status" do
 
     expect(page).not_to have_link('Desativar Cliente')
     expect(page).to have_link('Ativar Cliente')
+    end
+
+    it "and inactive user can't login" do
+
+      client = User.create!(
+        email: 'lucasgabriel@codeplay.com.br',
+        password: 'Senh@1234',
+        name: 'Lucas',
+        surname: 'Gabriel',
+        company: Company.create(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766',
+        ),
+        active: false
+      )
+
+    login_as client, scope: :user
+
+    expect(current_path).not_to eq(dashboard_index_path)
 
     end
+
   end
 end

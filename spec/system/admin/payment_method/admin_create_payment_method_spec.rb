@@ -11,6 +11,7 @@ describe "Admin create  payment methods" do
 
           fill_in "Nome",with: "Nubank"
           fill_in "Taxa",with: "1"
+          fill_in "Código do Banco",with: "266"
           select "Pix", from: 'Tipo de Pagamento'
           check('Ativo')
           attach_file 'Icone', Rails.root.join('spec/fixtures/payment_method_icon.svg')
@@ -21,9 +22,11 @@ describe "Admin create  payment methods" do
 
           expect(page).to have_content('Nubank')
           expect(page).to have_content('Pix')
+          expect(page).to have_content('266')
           expect(page).to have_content('1%')
           expect(page).to have_css('img[src*="payment_method_icon.svg"]')
           expect(page).to have_content('Ativo')
+
       end
 
       it "and attributes can't be blank" do
@@ -32,6 +35,6 @@ describe "Admin create  payment methods" do
 
         click_on('Concluir')
 
-        expect(page).to have_content('não pode ficar em branco', count: 2)
+        expect(page).to have_content('não pode ficar em branco', count: 3)
       end
   end

@@ -20,7 +20,17 @@
         <% end %>
     </ul>
     <%end%>
-
+</div>
+<div>
+    <%= f.label :bank_code %>
+    <%= f.number_field :bank_code %>
+    <%if payment_method.errors.full_messages_for(:bank_code).any? %>
+    <ul>
+        <% payment_method.errors.full_messages_for(:bank_code).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
 </div>
 <div>
     <%= f.label :active %>

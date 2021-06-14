@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
     before_action :authenticate_user!,
-	              only: %i[ create new show ]
-	before_action :set_company , only: [:show , :regenerate_token, :edit, :update]
+	              only: %i[index create new show ]
+	before_action :set_company , only: [:show , :regenerate_token, :edit, :update, :payments_configuration]
 	before_action :only_admin , only: [:index]
 
 	def index
@@ -33,9 +33,11 @@ class CompaniesController < ApplicationController
 		else
 			render :edit
 		end
-
 	end
 
+	def payments_configuration
+
+	end
 
 
 	def regenerate_token

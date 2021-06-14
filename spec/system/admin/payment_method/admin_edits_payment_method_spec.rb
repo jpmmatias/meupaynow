@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Admin edits payment methods" do
       it "successufuly" do
-        PaymentMethod.create!(name:'Nubank', payment_type: 0, tax: 1.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
+        PaymentMethod.create!(name:'Nubank', payment_type: 0, bank_code: 260, tax: 1.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
           admin_login
           visit dashboard_index_path
           click_on('Metodos de Pagamento')
@@ -27,7 +27,7 @@ describe "Admin edits payment methods" do
       end
 
       it "and attributes can't be blank" do
-        PaymentMethod.create!(name:'Nubank', payment_type: 0, tax: 1.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
+        PaymentMethod.create!(name:'Nubank', payment_type: 0, bank_code: 260, tax: 1.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
         admin_login
         visit dashboard_index_path
         click_on('Metodos de Pagamento')

@@ -63,6 +63,7 @@ class  PaymentMethodsController < ApplicationController
 					tax
 					active
 					icon
+                    bank_code
 				],
 			)
 	end

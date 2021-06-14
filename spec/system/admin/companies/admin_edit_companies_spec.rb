@@ -5,11 +5,19 @@ describe "Admin edit companies from users" do
     it "successufuly" do
         company = Company.create(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766')
 
-        admin_login
+        admin = User.create!(
+            email: 'janedoe@paynow.com.br',
+            password: 'Senh@1234',
+            name: 'Jane Doe',
+            role: 10,
+            active: true
+        )
+
+        login_as admin, scope: :user
 
         visit company_path(company)
 
-        expect(page).to have_link('Editar')
+        expect(page).to have_content('Editar')
         click_on('Editar')
 
         fill_in "Razão Social",	with: "Amazon"

@@ -1,6 +1,7 @@
 <% if current_user.role == 'admin'%>
 <%= link_to "Editar", edit_company_path(@company) %>
 <% end %>
+<%= link_to "Configurações de Pagamentos", company_company_payments_methods_path(@company) %>
 <h1>Nome: <%= @company.corporate_name %></h1>
 <h1>CNPJ: <%= @company.cnpj %></h1>
 <h1>Endereço: <%= @company.address %></h1>

@@ -9,6 +9,7 @@ pt-BR:
       payment_method:
         name: 'Nome'
         tax: 'Taxa'
+        bank_code: 'Código do Banco'
         payment_type: 'Tipo de Pagamento'
         active: 'Ativo'
         icon: 'Icone'

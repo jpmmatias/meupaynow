@@ -1,0 +1,20 @@
+<%= link_to "Adicionar Pagamento", new_company_company_payments_method_path(@company) %>
+<h1>Pagamentos Configurados</h1>
+<% @company_payment_methods.each do |method| %>
+<%= method.payment_method.name %>
+
+<% if method.payment_method.payment_type == 'pix' %>
+Pix
+<% end %>
+<% if method.payment_method.payment_type == 'cartao_de_credito' %>
+Cartão de Crédito
+<% end %>
+<% if method.payment_method.payment_type == 'boleto' %>
+Boleto Bancário
+<% end %>
+<%= "%03d" % method.payment_method.bank_code %>
+<%= method.payment_method.tax.to_s.last == '0' ?  number_to_percentage( method.payment_method.tax, precision: 0) : number_to_percentage( method.payment_method.tax, precision: 1) %>
+<%= method.alpha_numeric_code %>
+<%= method.ag %>
+<%= method.bank_account %>
+<% end %>
