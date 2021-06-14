@@ -3,9 +3,10 @@ require 'rails_helper'
 describe "Admin edit companies from users" do
 
     it "successufuly" do
+        logout
         company = Company.create(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766')
 
-        admin = User.create!(
+        aadmin = User.create!(
             email: 'janedoe@paynow.com.br',
             password: 'Senh@1234',
             name: 'Jane Doe',
@@ -13,7 +14,7 @@ describe "Admin edit companies from users" do
             active: true
         )
 
-        login_as admin, scope: :user
+        login_as aadmin, scope: :user
 
         visit company_path(company)
 
@@ -26,13 +27,15 @@ describe "Admin edit companies from users" do
         fill_in "Endereço de Faturamento",	with: "Rua da Amazon"
         click_on('Concluir')
 
-        expect(current_path).to eq(company_path(company))
+
         expect(page).to have_content('Amazon')
         expect(page).to have_content('financeiro@amazon.com')
         expect(page).to have_content('Rua da Amazon')
+        logout
     end
 
     it "and regenerate token" do
+        logout
         company = Company.create(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766')
 
         admin_login

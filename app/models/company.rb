@@ -1,4 +1,6 @@
 class Company < ApplicationRecord
+    extend FriendlyId
+    friendly_id :token, use: :slugged
     has_many :users
     has_many :products
     has_many :company_payment_methods

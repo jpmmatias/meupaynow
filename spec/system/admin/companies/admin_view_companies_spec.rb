@@ -16,6 +16,7 @@ describe "Admin view companies from users" do
 
         expect(page).to have_link('Code Play')
         expect(page).to have_link('Amazon')
+        logout
     end
 
     it "view company details" do
@@ -30,6 +31,7 @@ describe "Admin view companies from users" do
         expect(page).to have_content(company.address)
         expect(page).to have_content(company.email)
         expect(page).to have_content(company.token)
+        logout
     end
 
     it "and just admin is allowed to view all companies list" do
@@ -37,6 +39,7 @@ describe "Admin view companies from users" do
         visit companies_path
 
         expect(current_path).to eq(dashboard_index_path)
+        logout
     end
 
 
