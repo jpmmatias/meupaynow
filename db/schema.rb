@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_032356) do
+ActiveRecord::Schema.define(version: 2021_06_14_121224) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,20 @@ ActiveRecord::Schema.define(version: 2021_06_14_032356) do
     t.integer "bank_code"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.decimal "value"
+    t.float "discount_pix"
+    t.float "discount_credit"
+    t.float "discount_boleto"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "token"
+    t.integer "company_id", null: false
+    t.index ["company_id"], name: "index_products_on_company_id"
+    t.index ["token"], name: "index_products_on_token", unique: true
+  end
+
   create_table "status_requests", force: :cascade do |t|
     t.integer "requester_id", null: false
     t.integer "client_id", null: false
@@ -102,10 +116,22 @@ ActiveRecord::Schema.define(version: 2021_06_14_032356) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type"
+    t.string "{:null=>false}"
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object", limit: 1073741823
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "company_payment_methods", "companies"
   add_foreign_key "company_payment_methods", "payment_methods"
+  add_foreign_key "products", "companies"
   add_foreign_key "status_requests", "users", column: "client_id"
   add_foreign_key "status_requests", "users", column: "reciever_id"
   add_foreign_key "status_requests", "users", column: "requester_id"

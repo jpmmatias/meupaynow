@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   resources :companies, only: [:new , :create, :show, :index, :edit, :update] do
     get 'regenerate_token', on: :member
     resources :company_payments_methods, only: [:index, :new, :create]
+    resources :products, only: [:index, :show, :new, :create]
   end
   resources :clients, only: [:index, :show] do
     get 'request_change_status', on: :member
   end
-
   resources :status_requests, only: [] do
     get 'change', on: :member
   end

@@ -6,6 +6,7 @@
     <% if current_user.role == 'client_admin' or current_user.role == 'client' %>
     <p>Admin Cliente</p>
     <p>Cliente</p>
+    <%= link_to "Produtos", company_products_path(@company) %>
     <%= link_to @company.corporate_name, @company %>
     <% end %>
 
