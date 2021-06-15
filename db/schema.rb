@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_150438) do
+ActiveRecord::Schema.define(version: 2021_06_15_000456) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 2021_06_14_150438) do
     t.index ["payment_method_id"], name: "index_company_payment_methods_on_payment_method_id"
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.integer "cpf"
+    t.string "token"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_customers_on_slug", unique: true
+    t.index ["token"], name: "index_customers_on_token", unique: true
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -111,6 +122,15 @@ ActiveRecord::Schema.define(version: 2021_06_14_150438) do
     t.index ["requester_id"], name: "index_status_requests_on_requester_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.integer "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_subscriptions_on_company_id"
+    t.index ["customer_id"], name: "index_subscriptions_on_customer_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -148,5 +168,7 @@ ActiveRecord::Schema.define(version: 2021_06_14_150438) do
   add_foreign_key "status_requests", "users", column: "client_id"
   add_foreign_key "status_requests", "users", column: "reciever_id"
   add_foreign_key "status_requests", "users", column: "requester_id"
+  add_foreign_key "subscriptions", "companies"
+  add_foreign_key "subscriptions", "customers"
   add_foreign_key "users", "companies"
 end
