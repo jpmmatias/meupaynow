@@ -28,6 +28,7 @@ describe "Admin view billings" do
                     customer_id: customer.id,
                     company_payment_method_id: company_payment_method.id,
                     original_value: product.value,
+                    due_date: '2021-08-31'
                 },
         }
 
@@ -39,6 +40,7 @@ describe "Admin view billings" do
                 customer_id: customer2.id,
                 company_payment_method_id: company_payment_method2.id,
                 original_value: product2.value,
+                due_date: '2021-08-31'
             },
          }
 
@@ -82,6 +84,7 @@ describe "Admin view billings" do
                     customer_id: customer.id,
                     company_payment_method_id: company_payment_method.id,
                     original_value: product.value,
+                    due_date: '2021-08-31'
                 },
         }
 

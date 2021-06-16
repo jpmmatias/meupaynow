@@ -1,6 +1,6 @@
 class BillingsController < ApplicationController
-    before_action :check_admin
-    before_action :set_billing, only: [:edit_status, :show, :update]
+    before_action :check_admin, only: [:index, :show, :edit_status, :update]
+    before_action :set_billing, only: [:edit_status, :show, :update, :recieve]
     def index
         @billings = Billing.all
     end
@@ -20,6 +20,13 @@ class BillingsController < ApplicationController
             redirect_to billings_path, alert: 'Algum erro aconteceu'
         end
     end
+
+    def recieve
+        unless @billing.status = 'approved'
+            redirect_to root_path
+        end
+    end
+
 
 
     private
@@ -42,6 +49,7 @@ class BillingsController < ApplicationController
                 status
                 status_code
                 status_change_date
+                autorization_code
             ],
         )
 

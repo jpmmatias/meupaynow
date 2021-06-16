@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :billings, only: [:index, :show, :update] do
     get 'edit_status', on: :member
+    get 'recieve', on: :member
   end
 
   namespace :api do

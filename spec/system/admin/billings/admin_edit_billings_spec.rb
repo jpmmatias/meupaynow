@@ -25,6 +25,7 @@ describe "Admin edit billings" do
                     customer_id: customer.id,
                     company_payment_method_id: company_payment_method.id,
                     original_value: product.value,
+                    due_date: '2021-08-31'
                 },
         }
 
@@ -68,6 +69,7 @@ describe "Admin edit billings" do
                     customer_id: customer.id,
                     company_payment_method_id: company_payment_method.id,
                     original_value: product.value,
+                    due_date: '2021-08-31'
                 },
         }
 
@@ -114,6 +116,7 @@ describe "Admin edit billings" do
                     customer_id: customer.id,
                     company_payment_method_id: company_payment_method.id,
                     original_value: product.value,
+                    due_date: '2021-08-31'
                 },
         }
 

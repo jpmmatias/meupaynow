@@ -33,5 +33,16 @@
     </ul>
     <%end%>
 </div>
+<div>
+    <%= f.label :autorization_code, 'Código de Autorização' %>
+    <%= f.text_field :autorization_code %>
+    <%if @billing.errors.full_messages_for(:autorization_code).any? %>
+    <ul>
+        <% @billing.errors.full_messages_for(:autorization_code).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
 <%= f.submit 'Concluir' %>
 <%  end %>

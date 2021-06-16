@@ -47,6 +47,7 @@ class Api::V1::BillingsController < ActionController::API
                 customer_id
                 company_payment_method_id
                 original_value
+                due_date
             ],
         )
 	end

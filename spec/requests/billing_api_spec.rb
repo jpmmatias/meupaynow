@@ -23,6 +23,7 @@ describe 'Billings Api' do
                        customer_id: customer.id,
                        company_payment_method_id: company_payment_method.id,
                        original_value: product.value,
+                       due_date: '2021-08-31'
                    },
                 }
 
@@ -52,6 +53,7 @@ describe 'Billings Api' do
                             customer_id: customer.id,
                             company_payment_method_id: company_payment_method.id,
                             original_value: product.value,
+                            due_date: '2021-08-31'
                         },
                      }
 
@@ -80,13 +82,14 @@ describe 'Billings Api' do
                       customer_id: customer.id,
                       company_payment_method_id: company_payment_method.id,
                       original_value: product.value,
+                      due_date: '2021-08-31'
                   },
                }
 
           expect(response.status).not_to eq(201)
           expect(response.status).to eq(400)
           expect(response.content_type).to include('application/json')
-          parsed_body = JSON.parse(response.body)
+
   end
 
   end
