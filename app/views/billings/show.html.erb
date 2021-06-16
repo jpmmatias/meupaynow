@@ -9,6 +9,18 @@ Status: <% if @billing.status == 'pending' %>Pendente<% end %> <% if @billing.st
 Dia de Pagamento: <%= @billing.status_change_date %>
 <% end %>
 <% if @billing.status == 'pending' and !@billing.status_change_date.nil? %>
-Dia de Tentativa de Pagamento: <%= bill.status_change_date %>
+Dia de Tentativa de Pagamento: <%= @billing.status_change_date %>
 Status Code: <%= @billing.status_code %>
 <% end %>
+
+<h1>Histórico</h1>
+<ul>
+    <% @billing_versions.each do |billing| %>
+    <% if billing.try(:reify) %>
+    <li>
+        <p>Dia de Tentativa de Pagamento: <%= billing.reify.status_change_date %></p>
+        <p>Status Code: <%= billing.reify.status_code %></p>
+    </li>
+    <% end %>
+    <% end %>
+</ul>

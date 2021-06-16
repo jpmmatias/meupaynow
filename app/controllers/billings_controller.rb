@@ -5,7 +5,9 @@ class BillingsController < ApplicationController
         @billings = Billing.all
     end
 
-    def show ; end
+    def show
+        @billing_versions = @billing.versions
+    end
 
 
     def edit_status ;end
@@ -29,7 +31,7 @@ class BillingsController < ApplicationController
     end
 
     def set_billing
-        @billing = Billing.find(params[:id])
+        @billing = Billing.friendly.find(params[:id])
     end
 
     def billings_param
