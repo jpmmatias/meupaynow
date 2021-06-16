@@ -4,7 +4,6 @@ class Api::V1::BillingsController < ActionController::API
 	def create
         @billing = Billing.new(billing_params) do |billing|
             company_payment_method = CompanyPaymentMethod.find(billing.company_payment_method_id)
-
             billing.product_token = @product.token
             billing.company_token = @product.company.token
             billing.original_value = @product.value
@@ -20,7 +19,7 @@ class Api::V1::BillingsController < ActionController::API
             render json: @billing.as_json,
                        status: :created
             else
-                render json: { errors: @customer.errors.full_messages }, status: 400
+                render json: { errors: @billing.errors.full_messages }, status: 400
         end
         end
 
