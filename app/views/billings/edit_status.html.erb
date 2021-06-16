@@ -1,0 +1,37 @@
+<h1>Atualizar Status</h1>
+<%= form_with model:@billing do |f| %>
+<div>
+    <%= f.select(:status,[['Recusado', 'pending'], ['Aprovado', 'approved']]) %>
+    <%= f.label :status, 'Status' %>
+    <%if @billing.errors.full_messages_for(:status).any? %>
+    <ul>
+        <% @billing.errors.full_messages_for(:status).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <% end %>
+</div>
+<div>
+    <%= f.label :status_change_date, 'Data de efetização ou de tentativa de pagamento' %>
+    <%= f.date_field :status_change_date%>
+    <%if @billing.errors.full_messages_for(:status_change_date).any? %>
+    <ul>
+        <% @billing.errors.full_messages_for(:status_change_date).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<div>
+    <%= f.label :status_code, 'Código de Status' %>
+    <%= f.text_field :status_code %>
+    <%if @billing.errors.full_messages_for(:status_code).any? %>
+    <ul>
+        <% @billing.errors.full_messages_for(:status_code).each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <%end%>
+</div>
+<%= f.submit 'Concluir' %>
+<%  end %>

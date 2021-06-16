@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   resources :status_requests, only: [] do
     get 'change', on: :member
   end
-  resources :billings, only: [:index]
+
+  resources :billings, only: [:index, :show, :update] do
+    get 'edit_status', on: :member
+  end
 
   namespace :api do
     namespace :v1 do

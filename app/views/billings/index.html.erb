@@ -6,6 +6,16 @@ Método de Pagamentos:<% if bill.payment_method.payment_type == 'pix' %> Pix <% 
 Preço: <%= number_to_currency bill.value %>
 Cliente: <%= bill.customer.name %>
 Empresa: <%= bill.company_payment_method.company.corporate_name %>
-<%= link_to "Aprovar", '#' %>
-<%= link_to "Desaprovar", '#' %>
+Status: <% if bill.status == 'pending' %>Pendente<% end %> <% if bill.status == 'approved' %>Aprovado<% end %>
+<% if bill.status == 'approved' %>
+Dia de Pagamento: <%= bill.status_change_date %>
+<% end %>
+<% if bill.status == 'pending' and !bill.status_change_date.nil? %>
+Dia de Tentativa de Pagamento: <%= bill.status_change_date %>
+Status Code: <%= bill.status_code %>
+<% end %>
+<% if bill.status == 'pending'  %>
+<%= link_to "Editar Status de Pagamento", edit_status_billing_path(bill) %>
+<% end %>
+<%= link_to "Ver detalhes", billing_path(bill) %>
 <% end %>

@@ -1,0 +1,14 @@
+<h1>Detalhes de pagamento</h1>
+Token do Produto: <%= @billing.product_token %>
+Método de Pagamentos:<% if @billing.payment_method.payment_type == 'pix' %> Pix <% end %> <% if @billing.payment_method.payment_type == 'cartao_de_credito' %> Cartão de Crédito <% end %> <% if @billing.payment_method.payment_type == 'boleto' %> Boleto Bancário <% end %>
+Preço: <%= number_to_currency @billing.value %>
+Cliente: <%= @billing.customer.name %>
+Empresa: <%= @billing.company_payment_method.company.corporate_name %>
+Status: <% if @billing.status == 'pending' %>Pendente<% end %> <% if @billing.status == 'approved' %>Aprovado<% end %>
+<% if @billing.status == 'approved' %>
+Dia de Pagamento: <%= @billing.status_change_date %>
+<% end %>
+<% if @billing.status == 'pending' and !@billing.status_change_date.nil? %>
+Dia de Tentativa de Pagamento: <%= bill.status_change_date %>
+Status Code: <%= @billing.status_code %>
+<% end %>
