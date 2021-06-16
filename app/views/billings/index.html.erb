@@ -1,0 +1,11 @@
+<h1>Pagamentos</h1>
+
+<% @billings.each do |bill| %>
+Token do Produto: <%= bill.product_token %>
+Método de Pagamentos:<% if bill.payment_method.payment_type == 'pix' %> Pix <% end %> <% if bill.payment_method.payment_type == 'cartao_de_credito' %> Cartão de Crédito <% end %> <% if bill.payment_method.payment_type == 'boleto' %> Boleto Bancário <% end %>
+Preço: <%= number_to_currency bill.value %>
+Cliente: <%= bill.customer.name %>
+Empresa: <%= bill.company_payment_method.company.corporate_name %>
+<%= link_to "Aprovar", '#' %>
+<%= link_to "Desaprovar", '#' %>
+<% end %>
