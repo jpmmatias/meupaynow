@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe 'Courses Api' do
+describe 'Customers Api' do
 	context 'GET /api/v1/:company_token/customers' do
 		it 'should get customers' do
 			company = Company.create!(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766')

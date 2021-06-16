@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_000456) do
+ActiveRecord::Schema.define(version: 2021_06_16_001950) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,26 @@ ActiveRecord::Schema.define(version: 2021_06_15_000456) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "billings", force: :cascade do |t|
+    t.string "company_token"
+    t.string "product_token"
+    t.integer "company_payment_method_id", null: false
+    t.integer "customer_id", null: false
+    t.integer "credit_card_number"
+    t.string "credit_card_owner_name"
+    t.integer "credit_card_verification_code"
+    t.string "boleto_address"
+    t.integer "status", default: 0, null: false
+    t.string "token"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "original_value"
+    t.decimal "value"
+    t.index ["company_payment_method_id"], name: "index_billings_on_company_payment_method_id"
+    t.index ["customer_id"], name: "index_billings_on_customer_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -162,6 +182,8 @@ ActiveRecord::Schema.define(version: 2021_06_15_000456) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "billings", "company_payment_methods"
+  add_foreign_key "billings", "customers"
   add_foreign_key "company_payment_methods", "companies"
   add_foreign_key "company_payment_methods", "payment_methods"
   add_foreign_key "products", "companies"

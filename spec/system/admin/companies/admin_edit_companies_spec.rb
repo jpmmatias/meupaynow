@@ -15,7 +15,7 @@ describe "Admin edit companies from users" do
         )
 
         login_as aadmin, scope: :user
-
+        visit root_path
         visit company_path(company)
 
         expect(page).to have_content('Editar')

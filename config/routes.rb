@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       resources :companies, only: [] do
         resources :customers, only: [:index, :show, :create]
       end
+      resources :products, only: [] do
+        resources :billings, only: [:create], param: :token
+      end
     end
   end
 
