@@ -1,5 +1,25 @@
 class Api::V1::BillingsController < ActionController::API
     before_action :set_product, only: %i[create]
+    before_action :set_billing, only: %i[show]
+
+    def index
+        @billings = Billing.all
+        render json: @billings.as_json(include: :payment_method ),
+                       status: 200
+    end
+
+    def show
+        @billing = Billing.find_by(token: params[:id])
+        render json: @billing.as_json(include: :payment_method ), status: 200
+    end
+
+    def search
+        unless params[:due_date].nil?
+            @billings = Billing.due_date_after(params[:due_date])
+        end
+        render json: @billings.as_json(include: :payment_method ), status: 200
+    end
+
 
 	def create
         @billing = Billing.new(billing_params) do |billing|
@@ -21,7 +41,8 @@ class Api::V1::BillingsController < ActionController::API
             else
                 render json: { errors: @billing.errors.full_messages }, status: 400
         end
-        end
+    end
+
 
 
 
@@ -34,6 +55,11 @@ class Api::V1::BillingsController < ActionController::API
 	def set_product
 		@product = Product.find_by(token:params[:product_id])
 	end
+
+    def set_billing
+        @billing = Billing.find_by(token: params[:id])
+    end
+
 
 
 	def billing_params

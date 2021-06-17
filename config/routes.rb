@@ -28,6 +28,9 @@ Rails.application.routes.draw do
       resources :products, only: [] do
         resources :billings, only: [:create], param: :token
       end
+      resources :billings, only: [:index, :show] do
+        post :search, on: :collection
+      end
     end
   end
 

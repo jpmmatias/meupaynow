@@ -10,6 +10,7 @@ class Billing < ApplicationRecord
 
   validates :company_payment_method, :customer, :product_token, :due_date , presence: true
 
+  scope :due_date_after, ->(due_date) { where('due_date > ?', due_date) }
 
   validates :credit_card_number, :credit_card_owner_name, :credit_card_verification_code, presence: true, if: :paid_with_card?
   validates :boleto_address, presence: true, if: :paid_with_boleto?
