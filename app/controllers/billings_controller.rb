@@ -27,6 +27,18 @@ class BillingsController < ApplicationController
         end
     end
 
+    def history
+        @company = current_user.company
+        @billings = Billing.where("company_token = ? ", @company.token)
+    end
+
+    def last_90_days
+        @company = current_user.company
+        @billings = Billing.where("company_token = ? AND created_at > ?", @company.token, 90.days.ago)
+    end
+
+
+
 
 
     private

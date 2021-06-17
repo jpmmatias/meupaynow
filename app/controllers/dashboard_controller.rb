@@ -2,8 +2,13 @@ class DashboardController < ApplicationController
     before_action :authenticate_user!
     # before_action :check_if_user_has_company, only: [:index]
     def index
-        @company = current_user.company
-        @status_requests = StatusRequest.where(reciever: nil)
+        if current_user.role == 'admin'
+            @status_requests = StatusRequest.where(reciever: nil)
+            @billings = Billing.all
+        else
+            @company = current_user.company
+            @billings = Billing.where("company_token = ? AND created_at > ?", @company.token, 30.days.ago)
+        end
     end
 
 

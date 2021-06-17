@@ -2,14 +2,6 @@
     <p>Olá <%= current_user.name %>!</p>
     <% if current_user.role == 'admin'%>
     <p>Admin!</p>
-    <% end %>
-    <% if current_user.role == 'client_admin' or current_user.role == 'client' %>
-    <p>Admin Cliente</p>
-    <p>Cliente</p>
-    <%= link_to "Produtos", company_products_path(@company) %>
-    <%= link_to @company.corporate_name, @company %>
-    <% end %>
-
     <p>Notificações</p>
     <% @status_requests.each do |request| %>
     <div>
@@ -19,5 +11,36 @@
         <%= link_to "Não", '#' %>
     </div>
     <% end %>
+    <% end %>
+    <% if current_user.role == 'client_admin' or current_user.role == 'client' %>
+    <p>Admin Cliente</p>
+    <p>Cliente</p>
+    <%= link_to "Produtos", company_products_path(@company) %>
+    <%= link_to @company.corporate_name, @company %>
+    <h1>Pagamentos dos ultimos 30 dias</h1>
+    <ul>
+        <%  @billings.each do |billing|%>
+        <li>
+            <h1><%= billing.token %></h1>
+            <p><%= billing.customer.name %></p>
+            <p> <%= number_to_currency billing.value %></p>
+            <% if  billing.status='pending'%>
+            <p>Pendente</p>
+            <% end %>
+            <% if billing.status == 'approved' %>
+            <p>Aprovado</p>
+            <p>Dia de Pagamento: <%= billing.status_change_date %></p>
+            <% end %>
+
+        </li>
+        <% end %>
+
+    </ul>
+
+    <%= link_to "Todo Histórico de Pagamentos",   billing_history_company_path(current_user.company.id) %>
+    <%= link_to "Pagamentos dos ultimos 90 dias", billing_last_90_days_company_path(current_user.company.id) %>
+
+    <% end %>
+
 
 </div>

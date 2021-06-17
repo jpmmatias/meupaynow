@@ -1,0 +1,19 @@
+ <h1>Todo Histórico de Pagamentos</h1>
+ <ul>
+     <%  @billings.each do |billing|%>
+     <li>
+         <h1><%= billing.token %></h1>
+         <p><%= billing.customer.name %></p>
+         <p> <%= number_to_currency billing.value %></p>
+         <% if  billing.status='pending'%>
+         <p>Pendente</p>
+         <% end %>
+         <% if billing.status == 'approved' %>
+         <p>Aprovado</p>
+         <p>Dia de Pagamento: <%= billing.status_change_date %></p>
+         <% end %>
+
+     </li>
+     <% end %>
+
+ </ul>

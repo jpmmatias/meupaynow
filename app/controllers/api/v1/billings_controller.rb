@@ -1,6 +1,6 @@
 class Api::V1::BillingsController < ActionController::API
     before_action :set_product, only: %i[create]
-    before_action :set_billing, only: %i[show]
+    before_action :set_billing, only: %i[show update]
 
     def index
         @billings = Billing.all
@@ -43,8 +43,17 @@ class Api::V1::BillingsController < ActionController::API
         end
     end
 
-
-
+    def update
+        if @billing.nil?
+			render json: { error: 'Pagamento não achado' }, status: :not_found
+        else
+        if @billing.update(billing_update_params)
+            render json: @billing, status: 204
+        else
+            render json: { errors: @billing.errors.full_messages }, status: 500
+        end
+    end
+    end
 
 	private
 
@@ -60,6 +69,18 @@ class Api::V1::BillingsController < ActionController::API
         @billing = Billing.find_by(token: params[:id])
     end
 
+    def billing_update_params
+        params
+        .require(:billing)
+        .permit(
+            %i[
+                status
+                status_code
+                status_change_date
+                autorization_code
+            ],
+        )
+    end
 
 
 	def billing_params
