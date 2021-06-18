@@ -19,7 +19,6 @@ describe 'Admin Account Managment' do
 			expect(current_path).to eq(dashboard_index_path)
 			expect(page).to have_text('Login efetuado com sucesso')
 			expect(page).to have_text('Olá Jane')
-			expect(page).to have_text('Admin')
 			expect(page).to_not have_link('Criar Conta')
             expect(page).to_not have_link('Login')
 			expect(page).to have_link('Sair')

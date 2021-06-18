@@ -53,10 +53,9 @@ class BillingsController < ApplicationController
         if current_user.role == 'admin'
             redirect_to root_path
         end
-        if current_user.company.id != params[:id]
+        if current_user.company.token.downcase!  != params[:id].downcase!
             redirect_to root_path
         end
-
     end
 
 

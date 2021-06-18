@@ -41,7 +41,8 @@ class CompaniesController < ApplicationController
 
 
 	def regenerate_token
-		if @company.regenerate_token
+		@company.regenerate_token
+		if @company.save
            redirect_to company_path(@company), notice: 'Token atualizado com sucesso'
 		else
 			redirect_to company_path(@company), alert: 'Algum erro aconteceu'

@@ -27,7 +27,6 @@ describe 'Client Account Managment' do
 			fill_in 'Email de Faturamento', with: 'financeiroo@codeplay0.com.br'
 			click_on 'Concluir'
 
-            expect(page).to have_content('Admin Cliente')
             expect(page).to have_link('Sair')
             expect(current_path).to eq(dashboard_index_path)
 		end
@@ -78,7 +77,6 @@ describe 'Client Account Managment' do
 			fill_in 'Confirmação de senha', with: 'Senh@1234'
 			click_on 'Criar conta'
 
-            expect(page).to have_content('Cliente')
             expect(page).to have_link('Sair')
             expect(current_path).to eq(dashboard_index_path)
         end

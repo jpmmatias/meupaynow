@@ -29,7 +29,7 @@ class CompanyPaymentsMethodsController  < ApplicationController
     private
 
 	def set_company
-		@company = Company.find(params[:company_id])
+		@company = Company.friendly.find(params[:company_id])
 	end
 
 	def only_client_admin

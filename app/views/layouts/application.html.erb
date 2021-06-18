@@ -21,7 +21,7 @@
     <div class="alert alert-dark"> <strong><%= alert %></strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
     <% end%>
 
-    <% if user_signed_in? %>
+    <% if user_signed_in?  %>
     <%= render 'layouts/sidenav' %>
     <div class="height-100 bg-light body"> <%= yield %></div>
     <% else %>

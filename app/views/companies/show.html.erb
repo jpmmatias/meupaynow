@@ -1,13 +1,16 @@
 <% if current_user.role == 'admin'%>
 <%= link_to "Editar", edit_company_path(@company) %>
 <% end %>
-<%= link_to "Configurações de Pagamentos", company_company_payments_methods_path(@company) %>
-<h1>Nome: <%= @company.corporate_name %></h1>
-<h1>CNPJ: <%= @company.cnpj %></h1>
-<h1>Endereço: <%= @company.address %></h1>
-<h1>Nome: <%= @company.corporate_name %></h1>
-<h1>Email: <%= @company.email %></h1>
-<h1>Token: <%= @company.token %></h1>
-<% unless current_user.role == 'client' %>
-<%= link_to "Gerar Novo Token", regenerate_token_company_path %>
-<% end %>
+<%= link_to "Configurações de Pagamentos", company_company_payments_methods_path(@company), class: 'btn btn-outline btn-primary mt-3 mb-5' %>
+<div class="card mx-auto p-2" style="width: 50rem;">
+    <div class="card-body">
+        <h4 class="card-title display-4 mb-4"><%= @company.corporate_name %></h4>
+        <h6 class="card-text mb-3">CNPJ: <%= @company.cnpj %></h6>
+        <h6 class="card-text mb-3">Endereço: <%= @company.address %></h6>
+        <h6 class="card-text mb-3">Email: <%= @company.email %></h6>
+        <h6 class="card-text mb-5">Token: <%= @company.token %></h6>
+        <% unless current_user.role == 'client' %>
+        <%= link_to "Gerar Novo Token", regenerate_token_company_path , class: 'btn btn-outline-primary'%>
+        <% end %>
+    </div>
+</div>
