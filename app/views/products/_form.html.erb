@@ -1,61 +1,63 @@
-<%= form_with model:[company, product] do |f| %>
-<div>
-    <%= f.label :name %>
-    <%= f.text_field :name%>
-    <%if product.errors.full_messages_for(:name).any? %>
-    <ul>
-        <% payment_method.errors.full_messages_for(:name).each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
-    </ul>
-    <%end%>
-</div>
-<div>
-    <%= f.label :value %>
-    <%= f.number_field :value %>
-    <%if product.errors.full_messages_for(:value).any? %>
-    <ul>
-        <% product.errors.full_messages_for(:value).each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
-    </ul>
-    <%end%>
-</div>
-<div>
-    <%= f.label :discount_pix %>
-    <%= f.number_field :discount_pix %>
-    <%if product.errors.full_messages_for(:discount_pix).any? %>
-    <ul>
-        <% product.errors.full_messages_for(:discount_pix).each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
-    </ul>
-    <%end%>
-</div>
-<div>
-    <%= f.label :discount_credit %>
-    <%= f.number_field :discount_credit %>
-    <%if product.errors.full_messages_for(:discount_credit).any? %>
-    <ul>
-        <% product.errors.full_messages_for(:discount_credit).each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
-    </ul>
-    <%end%>
-</div>
+<div class="card p-5 shadow">
+    <%= form_with model:[company, product] do |f| %>
+    <div class="mb-4">
+        <%= f.label :name %>
+        <%= f.text_field :name%>
+        <%if product.errors.full_messages_for(:name).any? %>
+        <ul>
+            <% payment_method.errors.full_messages_for(:name).each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+        <%end%>
+    </div>
+    <div class="mb-4">
+        <%= f.label :value %>
+        <%= f.number_field :value %>
+        <%if product.errors.full_messages_for(:value).any? %>
+        <ul>
+            <% product.errors.full_messages_for(:value).each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+        <%end%>
+    </div>
+    <div class="mb-4">
+        <%= f.label :discount_pix %>
+        <%= f.number_field :discount_pix %>
+        <%if product.errors.full_messages_for(:discount_pix).any? %>
+        <ul>
+            <% product.errors.full_messages_for(:discount_pix).each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+        <%end%>
+    </div>
+    <div class="mb-4">
+        <%= f.label :discount_credit %>
+        <%= f.number_field :discount_credit %>
+        <%if product.errors.full_messages_for(:discount_credit).any? %>
+        <ul>
+            <% product.errors.full_messages_for(:discount_credit).each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+        <%end%>
+    </div>
 
-<div>
-    <%= f.label :discount_boleto %>
-    <%= f.number_field :discount_boleto %>
-    <%if product.errors.full_messages_for(:discount_boleto).any? %>
-    <ul>
-        <% product.errors.full_messages_for(:discount_boleto).each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
-    </ul>
-    <%end%>
+    <div class="mb-4">
+        <%= f.label :discount_boleto %>
+        <%= f.number_field :discount_boleto %>
+        <%if product.errors.full_messages_for(:discount_boleto).any? %>
+        <ul>
+            <% product.errors.full_messages_for(:discount_boleto).each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+        <%end%>
+    </div>
+
+
+    <%= f.submit 'Concluir' , class: 'btn btn-primary btn-md' %>
+    <% end %>
 </div>
-
-
-<%= f.submit 'Concluir' %>
-<% end %>

@@ -1,21 +1,37 @@
-<%= @product.name %>
-<%= number_to_currency @product.value %>
-<%= @product.discount_pix.to_s.last == '0' ?  number_to_percentage( @product.discount_pix, precision: 0) : number_to_percentage( @product.discount_pix, precision: 1) %>
-<%= @product.discount_credit.to_s.last == '0' ?  number_to_percentage( @product.discount_credit, precision: 0) : number_to_percentage( @product.discount_credit, precision: 1) %>
-<%= @product.discount_boleto.to_s.last == '0' ?  number_to_percentage( @product.discount_boleto, precision: 0) : number_to_percentage( @product.discount_boleto, precision: 1) %>
-
-<h1>Histórico</h1>
-<ul>
-    <% @product_versions.each do |product| %>
-    <% if product.try(:reify) %>
-    <li>
-        <h1><%= product.reify.name %></h1>
-        <p><%= number_to_currency product.reify.value %></p>
-        <p><%=  product.reify.discount_pix.to_s.last == '0' ?  number_to_percentage( product.reify.discount_pix, precision: 0) : number_to_percentage( product.reify.discount_pix, precision: 1) %></p>
-        <p><%=  product.reify.discount_credit.to_s.last == '0' ?  number_to_percentage( product.reify.discount_credit, precision: 0) : number_to_percentage( product.reify.discount_credit, precision: 1) %></p>
-        <p><%=  product.reify.discount_boleto.to_s.last == '0' ?  number_to_percentage( product.reify.discount_boleto, precision: 0) : number_to_percentage( product.reify.discount_boleto, precision: 1) %></p>
-    </li>
-
-    <% end %>
-    <% end %>
-</ul>
+<div class="card mx-auto p-2" style="width: 50rem;">
+    <div class="card-body">
+        <h4 class="card-title display-4 mb-4"><%= @product.name %></h4>
+        <h6 class="card-text mb-3">Preço: <%= number_to_currency @product.value %></h6>
+        <h6 class="card-text mb-3">Desconto Pix: <%= @product.discount_pix.to_s.last == '0' ?  number_to_percentage( @product.discount_pix, precision: 0) : number_to_percentage( @product.discount_pix, precision: 1) %></h6>
+        <h6 class="card-text mb-3">Desconto Crédito: <%= @product.discount_credit.to_s.last == '0' ?  number_to_percentage( @product.discount_credit, precision: 0) : number_to_percentage( @product.discount_credit, precision: 1) %></h6>
+        <h6 class="card-text mb-5">Desconto Boleto: <%= @product.discount_boleto.to_s.last == '0' ?  number_to_percentage( @product.discount_boleto, precision: 0) : number_to_percentage( @product.discount_boleto, precision: 1) %></h6>
+    </div>
+</div>
+<%= link_to "Voltar", dashboard_index_path , class: 'btn btn-outline-dark mb-5 mt-4'%>
+<h4>Histórico</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Desconto Pix</th>
+            <th scope="col">Desconto Crédito</th>
+            <th scope="col">Desconto Boleto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @product_versions.each do |product| %>
+        <% if product.try(:reify) %>
+        <tr>
+            <th scope="row"><%= product.reify.id %></th>
+            <td><%= product.reify.name %></td>
+            <td><%= number_to_currency product.reify.value %></td>
+            <td><%=  product.reify.discount_pix.to_s.last == '0' ?  number_to_percentage( product.reify.discount_pix, precision: 0) : number_to_percentage( product.reify.discount_pix, precision: 1) %></td>
+            <td><%= @product.discount_credit.to_s.last == '0' ?  number_to_percentage( @product.discount_credit, precision: 0) : number_to_percentage( @product.discount_credit, precision: 1) %></td>
+            <td><%= @product.discount_boleto.to_s.last == '0' ?  number_to_percentage( @product.discount_boleto, precision: 0) : number_to_percentage( @product.discount_boleto, precision: 1) %></td>
+        </tr>
+        <% end %>
+        <% end %>
+    </tbody>
+</table>

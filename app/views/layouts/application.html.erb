@@ -15,10 +15,10 @@
 
 <body>
     <% if notice %>
-    <div class="notice alert alert-primary"> <strong><%= notice %></strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+    <div style="top: 10%; left: 75%" class="notice alert alert-primary position-absolute"><strong><%= notice %></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
     <% end %>
     <% if alert %>
-    <div class="alert alert-dark"> <strong><%= alert %></strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
+    <div class="alert alert-dark  position-absolut"> <strong><%= alert %></strong> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>
     <% end%>
 
     <% if user_signed_in?  %>

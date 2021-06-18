@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
   private
 
   def set_company
-    @company = Company.find_by(id: params[:company_id])
+    @company =  Company.friendly.find( params[:company_id])
   end
 
   def set_product
@@ -50,7 +50,7 @@ class ProductsController < ApplicationController
   end
 
   def only_company_member
-    unless current_user.company == Company.find_by(id: params[:company_id])
+    unless current_user.company == Company.friendly.find( params[:company_id])
         redirect_to root_path
     end
   end

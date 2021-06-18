@@ -1,4 +1,4 @@
-<%= link_to "Adicionar Pagamento", new_company_company_payments_method_path(@company) %>
+<%= link_to "Adicionar Pagamento", new_company_company_payments_method_path(@company) , class: 'btn btn-outline-primary mb-4' %>
 <h1>Pagamentos Configurados</h1>
 <% @company_payment_methods.each do |method| %>
 <%= method.payment_method.name %>
