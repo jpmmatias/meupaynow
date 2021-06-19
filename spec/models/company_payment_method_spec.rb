@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CompanyPaymentMethod, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "associations" do
+    it { should belong_to(:payment_method) }
+    it { should belong_to(:company) }
+  end
 end
