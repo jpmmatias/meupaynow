@@ -1,13 +1,26 @@
-<% @clients.each do |client| %>
-<%= link_to client.full_name , client_path(client.id) %>
-<%= client.name %>
-<% if client.role == 'client' %>
-Cliente
-<% end %>
-<% if client.role == 'client_admin' %>
-Cliente Admin
-<% end %>
-<% end %>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @clients.each do |client| %>
+        <tr>
+            <th scope="row"><%= client.id %></th>
+            <td><%= link_to client.full_name , client_path(client.id) %></td>
+            <td><% if client.role == 'client' %>
+                Cliente
+                <% end %>
+                <% if client.role == 'client_admin' %>
+                Cliente Admin
+                <% end %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
 
 <% if @clients.nil? %>
 Sem clientes registrados

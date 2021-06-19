@@ -14,6 +14,15 @@ class  StatusRequestsController < ApplicationController
         end
     end
 
+    def destroy
+        if @request.destroy
+            redirect_to dashboard_index_path, notice: 'Desativação recusada com sucesso'
+        else
+            redirect_to dashboard_index_path, alert: 'Algum erro aconteceu'
+        end
+    end
+
+
     private
 
 	def set_request

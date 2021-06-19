@@ -1,7 +1,10 @@
-<% @companies.each do |company| %>
-<%= link_to company.corporate_name, company %>
-<% end %>
-
-<% if @compaies.nil? %>
+<ul class="list-group list-group-flush">
+    <% @companies.each do |company| %>
+    <li class="list-group-item">
+        <%= link_to company.corporate_name, company %>
+    </li>
+    <% end %>
+</ul>
+<% if @companies.nil? %>
 Sem empresas registradas
 <% end %>

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :clients, only: [:index, :show] do
     get 'request_change_status', on: :member
   end
-  resources :status_requests, only: [] do
+  resources :status_requests, only: [:destroy] do
     get 'change', on: :member
   end
 

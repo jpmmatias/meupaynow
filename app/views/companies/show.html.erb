@@ -1,7 +1,9 @@
 <% if current_user.role == 'admin'%>
-<%= link_to "Editar", edit_company_path(@company) %>
-<% end %>
+<%= link_to "Editar", edit_company_path(@company), class: 'btn btn-outline-primary mt-3 mb-5 mr-4' %>
+<% else %>
 <%= link_to "Configurações de Pagamentos", company_company_payments_methods_path(@company), class: 'btn btn-outline btn-primary mt-3 mb-5' %>
+<% end %>
+
 <div class="card mx-auto p-2" style="width: 50rem;">
     <div class="card-body">
         <h4 class="card-title display-4 mb-4"><%= @company.corporate_name %></h4>

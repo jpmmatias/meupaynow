@@ -1,4 +1,4 @@
-<%= link_to "Criar Novo Metodo de Pagamento", new_payment_method_path %>
+<%= link_to "Criar Novo Metodo de Pagamento", new_payment_method_path , class: 'btn btn-outline-primary' %>
 <% @payment_methods.each do |payment_method| %>
 <%= payment_method.name %>
 <%= "%03d" % payment_method.bank_code %>
@@ -19,5 +19,5 @@ Boleto Bancário
 <% end %>
 
 <% if @payment_method.nil? %>
-Sem métodos de pagamentos registrados
+<p class='mt-3'>Sem métodos de pagamentos registrados </p>
 <% end %>

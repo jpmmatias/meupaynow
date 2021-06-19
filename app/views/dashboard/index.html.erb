@@ -11,8 +11,8 @@
     <div>
         <h3>Pedido de <%= request.requester.full_name %></h3>
         <p>Desativar Cliente: <%= request.client.full_name %></p>
-        <%= link_to "Sim", change_status_request_path(request) %>
-        <%= link_to "Não", '#' %>
+        <%= link_to "Sim", change_status_request_path(request), class: 'btn btn-outline-primary' %>
+        <%= link_to "Não", status_request_path(request), class: 'btn btn-outline-danger', method: :delete %>
     </div>
     <% end %>
     <% end %>
@@ -43,10 +43,8 @@
             <p>Aprovado</p>
             <p>Dia de Pagamento: <%= billing.status_change_date %></p>
             <% end %>
-
         </li>
         <% end %>
-
     </ul>
 
 

@@ -4,28 +4,31 @@
  </header>
  <div class="l-navbar" id="nav-bar">
      <nav class="nav">
-         <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">PayNow!</span> </a>
+         <div>
+             <div class="nav_logo"> <i class='bx bx-diamond nav_logo-icon'></i> <span class="nav_logo-name">PayNow!</span> </div>
              <div class="nav_list">
-                 <%= link_to dashboard_index_path, :class=>"nav_link active" do %>
+                 <%= link_to dashboard_index_path, :class=>"nav_link " do %>
                  <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Home</span>
                  <% end %>
 
+
                  <% if current_user.role =='admin'%>
-
-                 <%= link_to payment_methods_path :class=>"nav_link" do %>
-                 <i class='bx bx-user nav_icon'></i> <span class="nav_name">Metodos de Pagamento</span>
+                 <%= link_to payment_methods_path, :class=>"nav_link" do %>
+                 <i class='bx bx-money nav_icon'></i> <span class="nav_name">Metodos de Pagamento</span>
                  <% end %>
 
-                 <%= link_to companies_path :class=>"nav_link" do %>
-                 <i class='bx bx-user nav_icon'></i> <span class="nav_name">Empresas</span>
+                 <%= link_to companies_path, :class=>"nav_link" do %>
+                 <i class='bx bx-building nav_icon'></i> <span class="nav_name">Empresas</span>
                  <% end %>
 
-                 <%= link_to clients_path :class=>"nav_link" do %>
-                 <i class='bx bx-user nav_icon'></i> <span class="nav_name">Clientes</span>
+                 <%= link_to clients_path, :class=>"nav_link" do %>
+                 <i class='bx  bx-user nav_icon'></i> <span class="nav_name">Clientes</span>
                  <% end %>
-                 <%= link_to  billings_path :class=>"nav_link" do %>
-                 <i class='bx bx-user nav_icon'></i> <span class="nav_name">Pagamentos</span>
+
+                 <%= link_to billings_path, :class=>"nav_link" do %>
+                 <i class='bx  bx-coin-stack nav_icon'></i> <span class="nav_name">Pagamentos</span>
                  <% end %>
+
                  <% end %>
              </div>
          </div>
