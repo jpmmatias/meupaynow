@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe 'Billings Api' do
-  context "GET /api/v1/billings" do
-    it "get all the billings" do
-      customer = Customer.create!(cpf:17794589722, name:'Primeiro Cliente')
+  context 'GET /api/v1/billings' do
+    it 'get all the billings' do
+      customer = Customer.create!(cpf:17794589722, name: 'Primeiro Cliente')
 
-      company = Company.create!(cnpj:'86678309000150', corporate_name: 'Code Play', email:'financeiro@codeplay.com.br', address:'Rua das Flores 766')
+      company = Company.create!(cnpj: '86678309000150', corporate_name: 'Code Play', email: 'financeiro@codeplay.com.br', address: 'Rua das Flores 766')
 
-      payment_method = PaymentMethod.create!(name:'Banco do Brasil', payment_type: 1, bank_code: 001, tax: 5.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
+      payment_method = PaymentMethod.create!(name: 'Banco do Brasil', payment_type: 1, bank_code: 001, tax: 5.0, icon: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
 
       payment_method2 = PaymentMethod.create!(name:'Nubank', payment_type: 0, bank_code: 001, tax: 5.0, icon:  fixture_file_upload(Rails.root.join('spec', 'fixtures', 'payment_method_icon.svg')))
 
