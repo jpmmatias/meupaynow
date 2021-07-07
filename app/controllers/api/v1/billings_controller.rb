@@ -1,101 +1,105 @@
-class Api::V1::BillingsController < ActionController::API
-    before_action :set_product, only: %i[create]
-    before_action :set_billing, only: %i[show update]
+module Api
+  module V1
+    class BillingsController < ActionController::API
+      before_action :set_product, only: %i[create]
+      before_action :set_billing, only: %i[show update]
 
-    def index
+      def index
         @billings = Billing.all
-        render json: @billings.as_json(include: :payment_method ),
-                       status: 200
-    end
+        render json: @billings.as_json(include: :payment_method),
+               status: :ok
+      end
 
-    def show
+      def show
         @billing = Billing.find_by(token: params[:id])
-        render json: @billing.as_json(include: :payment_method ), status: 200
-    end
+        render json: @billing.as_json(include: :payment_method), status: :ok
+      end
 
-    def search
+      def search
         unless params[:due_date].nil?
-            @billings = Billing.due_date_after(params[:due_date])
+          @billings = Billing.due_date_after(params[:due_date])
         end
-        render json: @billings.as_json(include: :payment_method ), status: 200
-    end
+        render json: @billings.as_json(include: :payment_method), status: :ok
+      end
 
-
-	def create
+      def create
         @billing = Billing.new(billing_params) do |billing|
-            company_payment_method = CompanyPaymentMethod.find(billing.company_payment_method_id)
-            billing.product_token = @product.token
-            billing.company_token = @product.company.token
-            billing.original_value = @product.value
-            if company_payment_method.payment_method.payment_type == 'pix'
-                billing.value =  @product.value - ((@product.value * @product.discount_pix) / 100 )
-            elsif company_payment_method.payment_method.payment_type == 'cartao_de_credito'
-                billing.value =  @product.value - ((@product.value * @product.discount_credit) / 100 )
-            elsif company_payment_method.payment_method.payment_type == 'boleto'
-                billing.value =  @product.value - ((@product.value * @product.discount_boleto )/ 100 )
-            end
+          company_payment_method = CompanyPaymentMethod.find(billing.company_payment_method_id)
+          billing.product_token = @product.token
+          billing.company_token = @product.company.token
+          billing.original_value = @product.value
+          case company_payment_method.payment_method.payment_type
+          when 'pix'
+            billing.value =  @product.value - ((@product.value * @product.discount_pix) / 100)
+          when 'cartao_de_credito'
+            billing.value =  @product.value - ((@product.value * @product.discount_credit) / 100)
+          when 'boleto'
+            billing.value =  @product.value - ((@product.value * @product.discount_boleto) / 100)
+          end
         end
-         if @billing.save
-            render json: @billing.as_json,
-                       status: :created
-            else
-                render json: { errors: @billing.errors.full_messages }, status: 400
+        if @billing.save
+          render json: @billing.as_json,
+                 status: :created
+        else
+          render json: { errors: @billing.errors.full_messages },
+                 status: :bad_request
         end
-    end
+      end
 
-    def update
+      def update
         if @billing.nil?
-			render json: { error: 'Pagamento não achado' }, status: :not_found
+          render json: { error: 'Pagamento não achado' }, status: :not_found
+        elsif @billing.update(billing_update_params)
+          render json: @billing, status: :no_content
         else
-        if @billing.update(billing_update_params)
-            render json: @billing, status: 204
-        else
-            render json: { errors: @billing.errors.full_messages }, status: 500
+          render json: { errors: @billing.errors.full_messages },
+                 status: :internal_server_error
         end
-    end
-    end
+      end
 
-	private
+      private
 
-	rescue_from ActionController::ParameterMissing do |e|
-		render json: { error: "Parametrô 'billing' esta faltando" }, status: 412
-	end
+      rescue_from ActionController::ParameterMissing do |_e|
+        render json: { error: "Parametrô 'billing' esta faltando" },
+               status: :precondition_failed
+      end
 
-	def set_product
-		@product = Product.find_by(token:params[:product_id])
-	end
+      def set_product
+        @product = Product.find_by(token: params[:product_id])
+      end
 
-    def set_billing
+      def set_billing
         @billing = Billing.find_by(token: params[:id])
-    end
+      end
 
-    def billing_update_params
+      def billing_update_params
         params
-        .require(:billing)
-        .permit(
+          .require(:billing)
+          .permit(
             %i[
-                status
-                status_code
-                status_change_date
-                autorization_code
-            ],
-        )
-    end
+              status
+              status_code
+              status_change_date
+              autorization_code
+            ]
+          )
+      end
 
-
-	def billing_params
+      def billing_params
         params
-        .require(:billing)
-        .permit(
+          .require(:billing)
+          .permit(
             %i[
-                credit_card_number
-                credit_card_owner_name
-                credit_card_verification_code
-                customer_id
-                company_payment_method_id
-                original_value
-                due_date
-            ],
-        )
-	end
+              credit_card_number
+              credit_card_owner_name
+              credit_card_verification_code
+              customer_id
+              company_payment_method_id
+              original_value
+              due_date
+            ]
+          )
+      end
+    end
+  end
 end

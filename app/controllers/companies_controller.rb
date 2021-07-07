@@ -1,76 +1,74 @@
 class CompaniesController < ApplicationController
-    before_action :authenticate_user!,
-	              only: %i[index create new show ]
-	before_action :set_company , only: [:show , :regenerate_token, :edit, :update, :payments_configuration]
-	before_action :only_admin , only: [:index]
+  before_action :authenticate_user!,
+                only: %i[index create new show]
+  before_action :set_company,
+                only: %i[show regenerate_token edit update
+                         payments_configuration]
+  before_action :only_admin, only: [:index]
 
-	def index
-		@companies = Company.all
-	end
+  def index
+    @companies = Company.all
+  end
 
+  def new
+    @company = Company.new
+  end
 
-    def new
-        @company = Company.new
+  def create
+    @company = Company.new(company_params)
+    if @company.save
+      current_user.update(company: @company)
+      redirect_to dashboard_index_path,
+                  notice: 'Empresa configurada com sucesso'
+    else
+      render :new
     end
+  end
 
-    def create
-        @company = Company.new(company_params)
-		if @company.save
-			current_user.update(company: @company)
-			redirect_to dashboard_index_path, notice: 'Empresa configurada com sucesso'
-		else
-			render :new
-		end
+  def show; end
+
+  def edit; end
+
+  def update
+    if @company.update(company_params)
+      redirect_to company_path(@company)
+    else
+      render :edit
     end
+  end
 
-	def show ;end
+  def payments_configuration; end
 
-	def edit ;end
+  def regenerate_token
+    @company.regenerate_token
+    if @company.save
+      redirect_to company_path(@company),
+                  notice: 'Token atualizado com sucesso'
+    else
+      redirect_to company_path(@company), alert: 'Algum erro aconteceu'
+    end
+  end
 
-	def update
-		if @company.update(company_params)
-			redirect_to company_path(@company)
-		else
-			render :edit
-		end
-	end
+  private
 
-	def payments_configuration
+  def set_company
+    @company = Company.friendly.find(params[:id])
+  end
 
-	end
+  def only_admin
+    redirect_to dashboard_index_path unless current_user.role == 'admin'
+  end
 
-
-	def regenerate_token
-		@company.regenerate_token
-		if @company.save
-           redirect_to company_path(@company), notice: 'Token atualizado com sucesso'
-		else
-			redirect_to company_path(@company), alert: 'Algum erro aconteceu'
-		end
-	end
-
-	private
-
-	def set_company
-		@company = Company.friendly.find(params[:id])
-	end
-
-	def only_admin
-		unless current_user.role == 'admin'
-			redirect_to dashboard_index_path
-		end
-	end
-
-	def company_params
-		params
-			.require(:company)
-			.permit(
-				%i[
-					corporate_name
-					cnpj
-					email
-					address
-				],
-			)
-	end
+  def company_params
+    params
+      .require(:company)
+      .permit(
+        %i[
+          corporate_name
+          cnpj
+          email
+          address
+        ]
+      )
+  end
 end

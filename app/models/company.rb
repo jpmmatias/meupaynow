@@ -1,16 +1,16 @@
 class Company < ApplicationRecord
-    extend FriendlyId
-    friendly_id :token, use: [:slugged , :history, :finders]
-    has_many :subscriptions
-    has_many :customers, :through => :subscriptions
-    has_many :users
-    has_many :products
-    has_many :company_payment_methods
-    has_secure_token
-    validates :cnpj,:corporate_name, :email,:address, presence: true, uniqueness: true
+  extend FriendlyId
+  friendly_id :token, use: %i[slugged history finders]
+  has_many :subscriptions
+  has_many :customers, through: :subscriptions
+  has_many :users
+  has_many :products
+  has_many :company_payment_methods
+  has_secure_token
+  validates :cnpj, :corporate_name, :email, :address, presence: true,
+                                                      uniqueness: true
 
-    def should_generate_new_friendly_id?
-        token_changed?
-    end
+  def should_generate_new_friendly_id?
+    token_changed?
+  end
 end
-

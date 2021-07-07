@@ -1,72 +1,64 @@
-class  PaymentMethodsController < ApplicationController
-    before_action :set_payment_method, only: [:edit, :update, :destroy]
-    before_action :check_admin
-    def index
-        @payment_methods = PaymentMethod.all
+class PaymentMethodsController < ApplicationController
+  before_action :set_payment_method, only: %i[edit update destroy]
+  before_action :check_admin
+  def index
+    @payment_methods = PaymentMethod.all
+  end
+
+  def new
+    @payment_method = PaymentMethod.new
+  end
+
+  def create
+    @payment_method = PaymentMethod.new(payment_method_params)
+    if @payment_method.save
+      redirect_to payment_methods_path
+    else
+      render :new
     end
+  end
 
-    def new
-        @payment_method = PaymentMethod.new
+  def edit; end
+
+  def update
+    if @payment_method.update(payment_method_params)
+      redirect_to payment_methods_path
+    else
+      render :edit
     end
+  end
 
-    def create
-        @payment_method = PaymentMethod.new(payment_method_params)
-        if @payment_method.save
-            redirect_to payment_methods_path
-        else
-            render :new
-        end
+  def destroy
+    if @payment_method.destroy
+      redirect_to payment_methods_path
+    else
+      flash[:alert] = 'Erro ao deletar metodo de pagamento'
+      redirect_to payment_methods_path
     end
+  end
 
-    def edit; end
+  private
 
-    def update
-       if @payment_method.update(payment_method_params)
-            redirect_to payment_methods_path
-        else
-            render :edit
-       end
-    end
+  def set_payment_method
+    @payment_method = PaymentMethod.find(params[:id])
+  end
 
-    def destroy
+  def check_admin
+    redirect_to root_path if current_user.role != 'admin'
+  end
 
-     if @payment_method.destroy
-         redirect_to payment_methods_path
-     else
-        flash[:alert] = 'Erro ao deletar metodo de pagamento'
-        redirect_to payment_methods_path
-     end
-
-    end
-
-
-    private
-
-    def set_payment_method
-        @payment_method = PaymentMethod.find(params[:id])
-    end
-
-    def check_admin
-        if current_user.role != 'admin'
-            redirect_to root_path
-        end
-    end
-
-
-    def payment_method_params
-		params
-			.require(:payment_method)
-			.permit(
-				%i[
-					name
-					payment_type
-					tax
-					active
-					icon
-                    bank_code
-				],
-			)
-	end
-
-
+  def payment_method_params
+    params
+      .require(:payment_method)
+      .permit(
+        %i[
+          name
+          payment_type
+          tax
+          active
+          icon
+          bank_code
+        ]
+      )
+  end
 end
